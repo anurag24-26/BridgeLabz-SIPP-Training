@@ -1,0 +1,14 @@
+# Ignore class files
+*.class
+
+# Ignore package-specific files
+*.log
+
+# Ignore IntelliJ / Eclipse / VS Code config folders
+.idea/
+.vscode/
+*.iml
+*.classpath
+*.project
+target/
+bin/
