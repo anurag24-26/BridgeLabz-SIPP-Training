@@ -1,5 +1,6 @@
 
-package java_control_flow;import java.util.Scanner;
+package java_control_flow;
+import java.util.Scanner;
 
 public class SumNaturalNumbersComparison {
     public static void main(String[] args) {
