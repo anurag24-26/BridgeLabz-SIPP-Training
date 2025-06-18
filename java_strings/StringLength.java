@@ -1,4 +1,4 @@
-package java_strings;
+package Java_Strings;
 import java.util.*;
 public class StringLength {
     public static void main(String[] args) {

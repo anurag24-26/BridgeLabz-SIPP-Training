@@ -1,4 +1,4 @@
-package java_control_flow;
+package Java_Control_Flow;
 import java.util.Scanner;
 
 public class CheckNumberType {

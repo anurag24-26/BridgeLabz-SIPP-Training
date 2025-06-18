@@ -1,6 +1,6 @@
 # Ignore class files
 *.class
-
+*.vscode
 # Ignore package-specific files
 *.log
 

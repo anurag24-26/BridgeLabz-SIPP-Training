@@ -1,4 +1,4 @@
-package java_arrays;
+package Java_Arrays;
 import java.util.*;
 class muliplicationarray{
     public static void main(String[] args){

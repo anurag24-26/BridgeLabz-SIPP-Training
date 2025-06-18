@@ -1,5 +1,5 @@
 // Program to check for natural number and calculate sum
-package java_control_flow;
+package Java_Control_Flow;
 import java.util.Scanner;
 
 public class SumOfNaturalNumbers {

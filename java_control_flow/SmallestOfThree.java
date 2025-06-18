@@ -1,5 +1,5 @@
 // Program to check if the first number is the smallest
-package java_control_flow;
+package Java_Control_Flow;
 import java.util.Scanner;
 
 public class SmallestOfThree {
