@@ -1,4 +1,4 @@
-package Java_Strings;
+package Strings;
 import java.util.Scanner;
 
 public class SubstringCompare {

@@ -1,4 +1,4 @@
-package Java_Strings;
+package Strings;
 
 public class NullPointer {
     public static void main(String[] args) {

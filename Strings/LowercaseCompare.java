@@ -1,19 +1,18 @@
-package Java_Strings;
-
+package Strings;
 import java.util.Scanner;
 
-public class UppercaseCompare {
+public class LowercaseCompare {
 
     // Method to manually convert text to lowercase using ASCII values
-    public static String manualToUpperCase(String input) {
+    public static String manualToLowerCase(String input) {
         StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
 
             // If character is uppercase A-Z
-            if (ch >= 'a' && ch <= 'z') {
-                result.append((char)(ch - 32)); 
+            if (ch >= 'A' && ch <= 'Z') {
+                result.append((char)(ch + 32)); 
             } else {
                 result.append(ch); // Keep other characters as is
             }
@@ -41,17 +40,17 @@ public class UppercaseCompare {
         String originalText = sc.nextLine();
 
         // Step 2: Built-in lowercase conversion
-        String builtInLower = originalText.toUpperCase();
+        String builtInLower = originalText.toLowerCase();
 
         // Step 3: Manual lowercase conversion
-        String manualLower = manualToUpperCase(originalText);
+        String manualLower = manualToLowerCase(originalText);
 
         // Step 4: Compare the results
         boolean isEqual = compareStrings(builtInLower, manualLower);
 
         // Output
         System.out.println("\nOriginal Text: " + originalText);
-        System.out.println("Built-in toUpperCase(): " + builtInLower);
+        System.out.println("Built-in toLowerCase(): " + builtInLower);
         System.out.println("Manual Conversion: " + manualLower);
         System.out.println("Are both lowercase versions equal? " + isEqual);
     }

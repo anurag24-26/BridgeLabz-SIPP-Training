@@ -1,4 +1,4 @@
-package Java_Methods;
+package Methods;
 import java.util.*;
 
 

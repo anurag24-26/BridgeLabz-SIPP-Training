@@ -1,4 +1,4 @@
-package Java_Methods;
+package Methods;
 import java.util.Scanner;
 public class SimpleIntrest {
     public static void main(String[] args) {
