@@ -28,6 +28,8 @@ This repository serves as a structured collection of Java assignments, showcasin
 | [`String_Handling`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Core-Java/String_Handling)                     | Demonstrates string manipulation using built-in methods (e.g., `length()`, `substring()`, `replace()`, etc.)  |
 | [`Strings`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Core-Java/Strings)                                     | Simple string input/output handling and fundamental string operations.                                        |
 
+> Click on each directories to explore respective code examples.
+
 ---
 
 ## 📂 Current Directory For OOPS Branch
@@ -38,6 +40,8 @@ This repository serves as a structured collection of Java assignments, showcasin
 | [`Constructors_Instance_ClassVariables_AccessModifiers`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/OOPS/Constructors_Instance_ClassVariables_AccessModifiers) | Demonstrates constructor types, access modifiers, instance vs class variables |
 | [`Keywords_and_Instance`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/OOPS/Keywords_and_Instance)                                                               | Covers `static`, `this`, `final`, `instanceof` keywords                       |
 | [`Inheritance`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/OOPS/Inheritance)                                                                                   | Multilevel, Hierarchical, Hybrid Inheritance in Java                          |
+
+> Click on each directories to explore respective code examples.
 
 ---
 
