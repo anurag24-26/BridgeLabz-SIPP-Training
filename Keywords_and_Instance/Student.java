@@ -1,4 +1,4 @@
-package keywords_and_instance;
+package Keywords_and_Instance;
 
 public class Student {
     static String universityName = "ABC University";

@@ -1,4 +1,4 @@
-package keywords_and_instance;
+package Keywords_and_Instance;
 
 public class Employee {
     static String companyName = "TechCorp Pvt Ltd";

@@ -1,4 +1,4 @@
-package keywords_and_instance;
+package Keywords_and_Instance;
 
 public class Vehicle {
     static double registrationFee = 1500.0;
