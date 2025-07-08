@@ -1,4 +1,4 @@
-package Stack_and_Queue;
+package Stack_and_Queue_HashMap;
 
 import java.util.Stack;
 
