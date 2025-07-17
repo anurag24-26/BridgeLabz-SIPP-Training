@@ -1,5 +1,5 @@
 
-package Scenario_Problems;
+package Linkedlist;
 
 public class BrowserNavigation {
     
