@@ -1,6 +1,6 @@
 package Generics;
 
-package Generics.WareHouse;
+
 import java.util.*;
 
 // === Abstract Base Class ===
