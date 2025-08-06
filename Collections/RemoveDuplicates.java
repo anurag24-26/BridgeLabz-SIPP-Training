@@ -12,6 +12,6 @@ public class RemoveDuplicates {
     public static void main(String[] args) {
         List<Integer> input = Arrays.asList(3, 1, 2, 2, 3, 4);
         List<Integer> result = removeDuplicates(input);
-        System.out.println(result);  // Output: [3, 1, 2, 4]
+        System.out.println(result); // Output: [3, 1, 2, 4]
     }
 }
