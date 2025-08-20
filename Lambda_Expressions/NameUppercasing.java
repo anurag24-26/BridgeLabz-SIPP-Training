@@ -1,5 +1,5 @@
 
-package com.example.functional;
+package Lambda_Expressions;
 
 import java.util.Arrays;
 import java.util.List;

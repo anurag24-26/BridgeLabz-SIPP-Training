@@ -1,5 +1,5 @@
 
-package com.example.functional;
+package Lambda_Expressions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,9 @@ import java.util.stream.Collectors;
  */
 public class NotificationFiltering {
 
-    enum Severity { LOW, MEDIUM, HIGH, CRITICAL }
+    enum Severity {
+        LOW, MEDIUM, HIGH, CRITICAL
+    }
 
     static class Alert {
         final String patientId;

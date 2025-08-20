@@ -1,5 +1,5 @@
 
-package com.example.functional;
+package Lambda_Expressions;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,7 +15,7 @@ public class ECommerceSorting {
     static class Product {
         final String name;
         final double price;
-        final double rating;   // 0-5
+        final double rating; // 0-5
         final double discount; // percentage 0-100
 
         Product(String name, double price, double rating, double discount) {
@@ -27,7 +27,7 @@ public class ECommerceSorting {
 
         @Override
         public String toString() {
-            return String.format("%s (₹%.2f, ⭐%.1f, %s%% off)", name, price, rating, (int)discount);
+            return String.format("%s (₹%.2f, ⭐%.1f, %s%% off)", name, price, rating, (int) discount);
         }
     }
 
@@ -44,8 +44,8 @@ public class ECommerceSorting {
         products.add(new Product("Smartwatch", 3999, 4.2, 25));
 
         // Lambdas with Comparator
-        Comparator<Product> byPriceAsc     = (a, b) -> Double.compare(a.price, b.price);
-        Comparator<Product> byRatingDesc   = (a, b) -> Double.compare(b.rating, a.rating);
+        Comparator<Product> byPriceAsc = (a, b) -> Double.compare(a.price, b.price);
+        Comparator<Product> byRatingDesc = (a, b) -> Double.compare(b.rating, a.rating);
         Comparator<Product> byDiscountDesc = (a, b) -> Double.compare(b.discount, a.discount);
 
         System.out.println("[Sort by Price ASC]");

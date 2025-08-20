@@ -1,5 +1,5 @@
 
-package com.example.functional;
+package Lambda_Expressions;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +14,15 @@ public class InvoiceCreation {
 
     static class Invoice {
         final String txnId;
-        Invoice(String txnId) { this.txnId = txnId; }
-        @Override public String toString() { return "Invoice{txnId='" + txnId + "'}"; }
+
+        Invoice(String txnId) {
+            this.txnId = txnId;
+        }
+
+        @Override
+        public String toString() {
+            return "Invoice{txnId='" + txnId + "'}";
+        }
     }
 
     public static void runDemo() {

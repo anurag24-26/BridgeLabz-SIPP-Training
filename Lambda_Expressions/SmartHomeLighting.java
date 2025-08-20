@@ -1,13 +1,15 @@
 
-package com.example.functional;
+package Lambda_Expressions;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Scenario:
- * A building has smart lights. Different triggers (motion, time of day, voice commands)
- * need to execute different light patterns. Use lambdas to define behaviors dynamically
+ * A building has smart lights. Different triggers (motion, time of day, voice
+ * commands)
+ * need to execute different light patterns. Use lambdas to define behaviors
+ * dynamically
  * without creating multiple classes.
  */
 public class SmartHomeLighting {
@@ -34,10 +36,14 @@ public class SmartHomeLighting {
 
         // Define behaviors with lambdas
         lighting
-            .register("motion", () -> System.out.println("[Lighting] Motion detected → turn ON hallway lights for 2 minutes."))
-            .register("sunset", () -> System.out.println("[Lighting] Sunset → set living room lights to warm 40%."))
-            .register("voice:party", () -> System.out.println("[Lighting] Voice 'party mode' → cycle rainbow colors at medium speed."))
-            .register("voice:relax", () -> System.out.println("[Lighting] Voice 'relax' → dim bedroom lights to 20% with soft fade."));
+                .register("motion",
+                        () -> System.out.println("[Lighting] Motion detected → turn ON hallway lights for 2 minutes."))
+                .register("sunset", () -> System.out.println("[Lighting] Sunset → set living room lights to warm 40%."))
+                .register("voice:party",
+                        () -> System.out
+                                .println("[Lighting] Voice 'party mode' → cycle rainbow colors at medium speed."))
+                .register("voice:relax", () -> System.out
+                        .println("[Lighting] Voice 'relax' → dim bedroom lights to 20% with soft fade."));
 
         // Triggers
         lighting.trigger("motion");

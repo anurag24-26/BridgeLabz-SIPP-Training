@@ -1,5 +1,5 @@
 
-package com.example.functional;
+package Lambda_Expressions;
 
 public class Main {
     public static void main(String[] args) {
