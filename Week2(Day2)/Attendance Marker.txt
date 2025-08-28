@@ -1,0 +1,50 @@
+CLASS AttendanceSystem
+    VARIABLE attendance[30][30]
+
+    METHOD markAttendance(studentIndex, dayIndex, value)
+        attendance[studentIndex][dayIndex] = value
+    END METHOD
+
+    METHOD dailySummary(dayIndex)
+        count = 0
+        FOR student FROM 0 TO 29
+            IF attendance[student][dayIndex] == 1
+                count = count + 1
+            ENDIF
+        ENDFOR
+        PRINT "Total students present on day " + dayIndex + " = " + count
+    END METHOD
+
+    METHOD monthlySummary(studentIndex)
+        count = 0
+        FOR day FROM 0 TO 29
+            IF attendance[studentIndex][day] == 1
+                count = count + 1
+            ENDIF
+        ENDFOR
+        PRINT "Student " + studentIndex + " present days = " + count
+    END METHOD
+
+    METHOD defaulterList()
+        FOR student FROM 0 TO 29
+            totalPresent = 0
+            FOR day FROM 0 TO 29
+                totalPresent = totalPresent + attendance[student][day]
+            ENDFOR
+            IF totalPresent < 22
+                PRINT "Student " + student + " is a defaulter"
+            ENDIF
+        ENDFOR
+    END METHOD
+END CLASS
+
+MAIN PROGRAM
+    system = NEW AttendanceSystem()
+
+    system.markAttendance(0, 0, 1)
+    system.markAttendance(2, 0, 0)
+
+    system.dailySummary(9)
+    system.monthlySummary(4)
+    system.defaulterList()
+END PROGRAM

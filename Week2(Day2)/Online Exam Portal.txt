@@ -1,0 +1,48 @@
+CLASS User
+    PRIVATE username
+    PRIVATE password
+
+    METHOD login(inputUsername, inputPassword) RETURNS BOOLEAN
+        IF inputUsername == username AND inputPassword == password
+            RETURN TRUE
+        ELSE
+            RETURN FALSE
+        ENDIF
+    END METHOD
+END CLASS
+
+CLASS Student EXTENDS User
+    PRIVATE enrolledCourse
+
+    METHOD login(inputUsername, inputPassword) RETURNS BOOLEAN
+        IF super.login(inputUsername, inputPassword) == TRUE AND enrolledCourse IS NOT NULL
+            PRINT "Student login successful"
+            RETURN TRUE
+        ELSE
+            PRINT "Student login failed"
+            RETURN FALSE
+        ENDIF
+    END METHOD
+END CLASS
+
+CLASS Admin EXTENDS User
+    PRIVATE role
+
+    METHOD login(inputUsername, inputPassword) RETURNS BOOLEAN
+        IF super.login(inputUsername, inputPassword) == TRUE AND role == "ADMIN"
+            PRINT "Admin login successful"
+            RETURN TRUE
+        ELSE
+            PRINT "Admin login failed"
+            RETURN FALSE
+        ENDIF
+    END METHOD
+END CLASS
+
+MAIN PROGRAM
+    student = NEW Student("john123", "pass123", "JavaCourse")
+    admin = NEW Admin("admin01", "adminPass", "ADMIN")
+
+    CALL student.login("john123", "pass123")
+    CALL admin.login("admin01", "adminPass")
+END PROGRAM

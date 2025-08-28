@@ -1,0 +1,43 @@
+CLASS WordCounter
+
+    METHOD countWords(articleText)
+        1. Split the articleText into words
+        2. Normalize each word (convert to lowercase, remove punctuation)
+        3. Use Stream API with Collectors.groupingBy(word, counting()) 
+           to build Map<String, Integer> where
+               Key = word
+               Value = frequency
+        4. RETURN the frequencyMap
+    END METHOD
+
+    METHOD findMostFrequentWord(frequencyMap)
+        1. Use stream() on frequencyMap.entrySet()
+        2. Find entry with maximum value
+        3. RETURN that word and its count
+    END METHOD
+
+    METHOD findRareWords(frequencyMap)
+        1. Use stream() on frequencyMap.entrySet()
+        2. Filter where count == 1
+        3. Collect results into a List<String>
+        4. RETURN list of rare words
+    END METHOD
+
+END CLASS
+
+
+MAIN PROGRAM
+    INPUT articleText = "Sports bring people together. Sports inspire teamwork. Sports create leaders."
+
+    wordCounter = NEW WordCounter()
+
+    frequencyMap = wordCounter.countWords(articleText)
+
+    PRINT "Word Frequencies: " + frequencyMap
+
+    mostFrequent = wordCounter.findMostFrequentWord(frequencyMap)
+    PRINT "Most Frequent Word = " + mostFrequent
+
+    rareWords = wordCounter.findRareWords(frequencyMap)
+    PRINT "Rare Words = " + rareWords
+END PROGRAM

@@ -1,0 +1,46 @@
+CLASS Vehicle
+    PRIVATE vehicleNumber
+    PRIVATE entryTime
+
+    METHOD calculateFee(exitTime) RETURNS INTEGER
+        RETURN 0
+    END METHOD
+END CLASS
+
+CLASS Car EXTENDS Vehicle
+    METHOD calculateFee(exitTime) RETURNS INTEGER
+        hours = CEIL(exitTime - entryTime)
+        fee = 50 + (hours - 1) * 30
+        RETURN fee
+    END METHOD
+END CLASS
+
+CLASS Bike EXTENDS Vehicle
+    METHOD calculateFee(exitTime) RETURNS INTEGER
+        hours = CEIL(exitTime - entryTime)
+        fee = 20 + (hours - 1) * 10
+        RETURN fee
+    END METHOD
+END CLASS
+
+CLASS Truck EXTENDS Vehicle
+    METHOD calculateFee(exitTime) RETURNS INTEGER
+        hours = CEIL(exitTime - entryTime)
+        fee = 100 + (hours - 1) * 50
+        RETURN fee
+    END METHOD
+END CLASS
+
+MAIN PROGRAM
+    car = NEW Car("KA05AB1234", 10:00)
+    bike = NEW Bike("KA05XY7890", 11:15)
+    truck = NEW Truck("KA09TR5566", 09:30)
+
+    carFee = car.calculateFee(13:30)
+    bikeFee = bike.calculateFee(12:00)
+    truckFee = truck.calculateFee(14:00)
+
+    PRINT "Car Fee = " + carFee
+    PRINT "Bike Fee = " + bikeFee
+    PRINT "Truck Fee = " + truckFee
+END PROGRAM

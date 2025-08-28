@@ -1,0 +1,69 @@
+CLASS Node
+    VARIABLE stopName
+    VARIABLE next
+END CLASS
+
+CLASS BusRoute
+    VARIABLE head
+
+    METHOD insertStop(afterStop, newStop)
+        node = head
+        WHILE node IS NOT NULL
+            IF node.stopName == afterStop
+                newNode = NEW Node(newStop)
+                newNode.next = node.next
+                node.next = newNode
+                BREAK
+            ENDIF
+            node = node.next
+        ENDWHILE
+    END METHOD
+
+    METHOD deleteStop(stopToDelete)
+        node = head
+        prev = NULL
+        WHILE node IS NOT NULL
+            IF node.stopName == stopToDelete
+                prev.next = node.next
+                BREAK
+            ENDIF
+            prev = node
+            node = node.next
+        ENDWHILE
+    END METHOD
+
+    METHOD searchStop(stopToSearch)
+        node = head
+        WHILE node IS NOT NULL
+            IF node.stopName == stopToSearch
+                PRINT "Stop found"
+                RETURN
+            ENDIF
+            node = node.next
+        ENDWHILE
+        PRINT "Stop not found"
+    END METHOD
+
+    METHOD displayRoute()
+        node = head
+        WHILE node IS NOT NULL
+            PRINT node.stopName + " -> "
+            node = node.next
+        ENDWHILE
+    END METHOD
+END CLASS
+
+MAIN PROGRAM
+    route = NEW BusRoute()
+    route.head = NEW Node("Depot")
+    route.head.next = NEW Node("Main Street")
+    route.head.next.next = NEW Node("City Mall")
+    route.head.next.next.next = NEW Node("Hospital")
+    route.head.next.next.next.next = NEW Node("Airport")
+
+    route.insertStop("City Mall", "University")
+    route.deleteStop("Hospital")
+    route.searchStop("Airport")
+    route.displayRoute()
+END PROGRAM
+
