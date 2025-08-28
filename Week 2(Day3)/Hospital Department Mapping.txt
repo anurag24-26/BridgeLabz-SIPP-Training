@@ -1,0 +1,25 @@
+CLASS Doctor
+    PRIVATE name
+    PRIVATE specialization
+    PRIVATE experienceYears
+
+    METHOD Constructor(name, specialization, experienceYears)
+        SET this.name = name
+        SET this.specialization = specialization
+        SET this.experienceYears = experienceYears
+
+    METHOD getDetails()
+        RETURN name + " - " + specialization + " (" + experienceYears + " years)"
+END CLASS
+
+
+SIMULATION:
+departmentDirectory = Map<String, List<Doctor>>
+
+ADD "Cardiology" → [Doctor("Dr. Mehta", "Cardiologist", 15), Doctor("Dr. Kapoor", "Cardiologist", 10)]
+ADD "Neurology" → [Doctor("Dr. Sharma", "Neurologist", 10), Doctor("Dr. Das", "Neurologist", 8)]
+ADD "Pediatrics" → [Doctor("Dr. Ritu", "Pediatrician", 12), Doctor("Dr. Anjali", "Pediatrician", 7)]
+
+QUERY "Neurology":
+FOR each doctor IN departmentDirectory["Neurology"]
+    PRINT doctor.getDetails()

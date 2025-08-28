@@ -1,0 +1,91 @@
+PSEUDOCODE: Flight Price Analyzer
+
+CLASS Flight:
+    ATTRIBUTES:
+        - flightNumber (String)
+        - price (Double)
+        - duration (Integer)
+    
+    CONSTRUCTOR Flight(flightNumber, price, duration):
+        SET this.flightNumber = flightNumber
+        SET this.price = price
+        SET this.duration = duration
+
+CLASS FlightComparator IMPLEMENTS Comparator<Flight>:
+    ATTRIBUTES:
+        - sortBy (String)
+    
+    CONSTRUCTOR FlightComparator(sortBy):
+        SET this.sortBy = sortBy
+    
+    METHOD compare(f1, f2):
+        IF sortBy equals "PRICE":
+            RETURN Double.compare(f1.price, f2.price)
+        ELSE IF sortBy equals "DURATION":
+            RETURN Integer.compare(f1.duration, f2.duration)
+        ELSE: // PRICE_DURATION
+            SET priceComp = Double.compare(f1.price, f2.price)
+            IF priceComp != 0:
+                RETURN priceComp
+            RETURN Integer.compare(f1.duration, f2.duration)
+
+CLASS MergeSort:
+    STATIC METHOD sort(flights, comparator):
+        IF flights.length <= 1:
+            RETURN flights
+        
+        SET mid = flights.length / 2
+        SET left = flights[0 to mid-1]
+        SET right = flights[mid to end]
+        
+        SET sortedLeft = sort(left, comparator)
+        SET sortedRight = sort(right, comparator)
+        
+        RETURN merge(sortedLeft, sortedRight, comparator)
+    
+    STATIC METHOD merge(left, right, comparator):
+        CREATE result array
+        SET i = 0, j = 0
+        
+        WHILE i < left.length AND j < right.length:
+            IF comparator.compare(left[i], right[j]) <= 0:
+                ADD left[i] to result
+                INCREMENT i
+            ELSE:
+                ADD right[j] to result
+                INCREMENT j
+        
+        ADD remaining elements from left and right
+        RETURN result
+
+CLASS FlightAnalyzer:
+    ATTRIBUTES:
+        - flights (List<Flight>)
+    
+    CONSTRUCTOR FlightAnalyzer():
+        INITIALIZE flights as empty list
+    
+    METHOD addFlight(flight):
+        ADD flight to flights
+    
+    METHOD sortByPrice():
+        SET comparator = new FlightComparator("PRICE")
+        SET sorted = MergeSort.sort(flights.toArray(), comparator)
+        RETURN sorted
+    
+    METHOD sortByDuration():
+        SET comparator = new FlightComparator("DURATION")
+        SET sorted = MergeSort.sort(flights.toArray(), comparator)
+        RETURN sorted
+
+MAIN METHOD:
+    CREATE analyzer = new FlightAnalyzer()
+    
+    CALL analyzer.addFlight(Flight("AA101", 350.0, 360))
+    CALL analyzer.addFlight(Flight("DL205", 280.0, 420))
+    CALL analyzer.addFlight(Flight("UA301", 320.0, 380))
+    
+    SET sortedByPrice = analyzer.sortByPrice()
+    SET sortedByDuration = analyzer.sortByDuration()
+    
+    PRINT "Sorted by price and duration"

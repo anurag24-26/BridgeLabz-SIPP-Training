@@ -1,0 +1,85 @@
+PSEUDOCODE: Vehicle Rental System
+
+INTERFACE Rentable:
+    METHOD rent(days): Double
+    METHOD isAvailable(): Boolean
+
+ABSTRACT CLASS Vehicle IMPLEMENTS Rentable:
+    ATTRIBUTES:
+        - id (String)
+        - model (String)
+        - dailyRate (Double)
+        - isRented (Boolean)
+    
+    CONSTRUCTOR Vehicle(id, model, dailyRate):
+        SET this.id = id
+        SET this.model = model
+        SET this.dailyRate = dailyRate
+        SET isRented = false
+    
+    METHOD isAvailable():
+        RETURN NOT isRented
+    
+    ABSTRACT METHOD calculateCost(days): Double
+
+CLASS Car EXTENDS Vehicle:
+    CONSTRUCTOR Car(id, model, dailyRate):
+        CALL super(id, model, dailyRate)
+    
+    METHOD rent(days):
+        IF isAvailable():
+            SET isRented = true
+            RETURN calculateCost(days)
+        RETURN 0.0
+    
+    METHOD calculateCost(days):
+        RETURN dailyRate * days
+
+CLASS Truck EXTENDS Vehicle:
+    CONSTRUCTOR Truck(id, model, dailyRate):
+        CALL super(id, model, dailyRate)
+    
+    METHOD rent(days):
+        IF isAvailable():
+            SET isRented = true
+            RETURN calculateCost(days)
+        RETURN 0.0
+    
+    METHOD calculateCost(days):
+        RETURN dailyRate * days * 1.5 // 50% premium
+
+CLASS VehicleFactory:
+    STATIC METHOD createVehicle(type, id, model, dailyRate):
+        IF type equals "CAR":
+            RETURN new Car(id, model, dailyRate)
+        ELSE IF type equals "TRUCK":
+            RETURN new Truck(id, model, dailyRate)
+        RETURN null
+
+CLASS RentalSystem:
+    ATTRIBUTES:
+        - vehicles (List<Vehicle>)
+    
+    CONSTRUCTOR RentalSystem():
+        INITIALIZE vehicles as empty list
+    
+    METHOD addVehicle(vehicle):
+        ADD vehicle to vehicles
+    
+    METHOD rentVehicle(id, days):
+        FOR each vehicle in vehicles:
+            IF vehicle.id equals id:
+                RETURN vehicle.rent(days)
+        RETURN 0.0
+
+MAIN METHOD:
+    CREATE system = new RentalSystem()
+    
+    SET car = VehicleFactory.createVehicle("CAR", "C001", "Toyota", 50.0)
+    SET truck = VehicleFactory.createVehicle("TRUCK", "T001", "Ford", 80.0)
+    
+    CALL system.addVehicle(car)
+    CALL system.addVehicle(truck)
+    
+    SET cost1 = system.rentVehicle("C001", 3) // $150
+    SET cost2 = system.rentVehicle("T001", 2) // $240

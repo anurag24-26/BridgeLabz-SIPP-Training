@@ -1,0 +1,26 @@
+FUNCTION wordCounter(paragraph)
+    CLEAN paragraph → remove punctuation, convert to lowercase
+    words = split(paragraph, " ")
+
+    CREATE map AS Map<String, Integer>
+
+    FOR EACH word IN words
+        IF map.contains(word) THEN
+            map[word] = map[word] + 1
+        ELSE
+            map[word] = 1
+        END IF
+    END FOR
+
+    SORT map by value in descending order
+
+    FOR EACH (word, count) IN map
+        PRINT word + " → " + count
+    END FOR
+END FUNCTION
+
+
+FUNCTION MAIN
+    paragraph = "The news today is about the rise in technology trends."
+    CALL wordCounter(paragraph)
+END FUNCTION

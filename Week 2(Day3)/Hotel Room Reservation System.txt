@@ -1,0 +1,43 @@
+CLASS Room
+    PRIVATE roomNumber
+    PRIVATE customerName
+    PRIVATE daysStayed
+
+    METHOD Constructor(roomNumber, customerName, daysStayed)
+        SET this.roomNumber = roomNumber
+        SET this.customerName = customerName
+        SET this.daysStayed = daysStayed
+
+    METHOD calculateBill()   // overridden in subclasses
+        RETURN 0
+END CLASS
+
+
+CLASS DeluxeRoom EXTENDS Room
+    PRIVATE rate = 3000
+
+    METHOD calculateBill()
+        RETURN daysStayed * rate
+END CLASS
+
+
+CLASS SuiteRoom EXTENDS Room
+    PRIVATE rate = 5000
+
+    METHOD calculateBill()
+        RETURN daysStayed * rate
+END CLASS
+
+
+SIMULATION:
+CREATE booking1 = new DeluxeRoom(101, "Ravi", 3)
+PRINT "Room Type: Deluxe"
+PRINT "Customer: Ravi"
+PRINT "Nights Stayed: 3"
+PRINT "Total Bill: ₹" + booking1.calculateBill()
+
+CREATE booking2 = new SuiteRoom(201, "Anita", 2)
+PRINT "Room Type: Suite"
+PRINT "Customer: Anita"
+PRINT "Nights Stayed: 2"
+PRINT "Total Bill: ₹" + booking2.calculateBill()

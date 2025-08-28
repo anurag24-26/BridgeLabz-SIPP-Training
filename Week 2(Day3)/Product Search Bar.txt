@@ -1,0 +1,24 @@
+FUNCTION binarySearch(catalog, target)
+    left = 0
+    right = catalog.length - 1
+
+    WHILE left <= right
+        mid = (left + right) DIV 2
+        IF catalog[mid] == target
+            RETURN true
+        ELSE IF catalog[mid] < target
+            left = mid + 1
+        ELSE
+            right = mid - 1
+    END WHILE
+
+    RETURN false
+END FUNCTION
+
+
+SIMULATION:
+catalog = ["AirPods", "Backpack", "Camera", "Laptop", "Shoes", "Smartphone", "Watch"]
+
+SEARCH "Laptop" → FOUND
+SEARCH "Headphones" → NOT FOUND
+SEARCH "Shoes" → FOUND

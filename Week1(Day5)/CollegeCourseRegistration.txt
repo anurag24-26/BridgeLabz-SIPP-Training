@@ -1,0 +1,66 @@
+PSEUDOCODE: College Course Registration
+
+CLASS Student:
+    ATTRIBUTES:
+        - studentId (String)
+        - name (String)
+    
+    CONSTRUCTOR Student(studentId, name):
+        SET this.studentId = studentId
+        SET this.name = name
+
+CLASS Course:
+    ATTRIBUTES:
+        - courseId (String)
+        - courseName (String)
+        - maxCapacity (Integer)
+    
+    CONSTRUCTOR Course(courseId, courseName, maxCapacity):
+        SET this.courseId = courseId
+        SET this.courseName = courseName
+        SET this.maxCapacity = maxCapacity
+
+CLASS RegistrationSystem:
+    ATTRIBUTES:
+        - courseStudentMap (Map<Course, List<Student>>)
+    
+    CONSTRUCTOR RegistrationSystem():
+        INITIALIZE courseStudentMap as empty HashMap
+    
+    METHOD addCourse(course):
+        PUT course, new ArrayList<Student> in courseStudentMap
+    
+    METHOD registerStudent(course, student):
+        SET studentList = GET course from courseStudentMap
+        IF studentList.size() < course.maxCapacity:
+            ADD student to studentList
+            PRINT "Registered " + student.name + " for " + course.courseName
+            RETURN true
+        PRINT "Course full"
+        RETURN false
+    
+    METHOD displayStudentsPerCourse():
+        FOR each course, studentList in courseStudentMap:
+            PRINT course.courseName + " (" + studentList.size() + "/" + course.maxCapacity + "):"
+            FOR each student in studentList:
+                PRINT "  " + student.name
+
+MAIN METHOD:
+    CREATE system = new RegistrationSystem()
+    
+    SET cs101 = new Course("CS101", "Programming", 2)
+    SET math201 = new Course("MATH201", "Calculus", 3)
+    
+    CALL system.addCourse(cs101)
+    CALL system.addCourse(math201)
+    
+    SET alice = new Student("S001", "Alice")
+    SET bob = new Student("S002", "Bob")
+    SET carol = new Student("S003", "Carol")
+    
+    CALL system.registerStudent(cs101, alice)
+    CALL system.registerStudent(cs101, bob)
+    CALL system.registerStudent(cs101, carol) // Should fail - full
+    CALL system.registerStudent(math201, alice)
+    
+    CALL system.displayStudentsPerCourse()

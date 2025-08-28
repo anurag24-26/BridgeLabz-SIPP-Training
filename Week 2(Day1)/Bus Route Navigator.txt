@@ -1,0 +1,83 @@
+CLASS Node
+    ATTRIBUTE stopName
+    ATTRIBUTE next
+END CLASS
+
+CLASS BusRoute
+    ATTRIBUTE head
+
+    METHOD insertStop(afterStop, newStop)
+        CREATE newNode WITH stopName = newStop
+        temp = head
+        WHILE temp != NULL
+            IF temp.stopName == afterStop THEN
+                newNode.next = temp.next
+                temp.next = newNode
+                PRINT "Inserted " + newStop + " after " + afterStop
+                RETURN
+            END IF
+            temp = temp.next
+        END WHILE
+    END METHOD
+
+    METHOD deleteStop(stopName)
+        temp = head
+        prev = NULL
+        WHILE temp != NULL
+            IF temp.stopName == stopName THEN
+                IF prev == NULL THEN
+                    head = temp.next
+                ELSE
+                    prev.next = temp.next
+                END IF
+                PRINT stopName + " removed from route."
+                RETURN
+            END IF
+            prev = temp
+            temp = temp.next
+        END WHILE
+        PRINT "Stop not found."
+    END METHOD
+
+    METHOD searchStop(stopName)
+        temp = head
+        WHILE temp != NULL
+            IF temp.stopName == stopName THEN
+                PRINT stopName + " found in route."
+                RETURN TRUE
+            END IF
+            temp = temp.next
+        END WHILE
+        PRINT stopName + " not found."
+        RETURN FALSE
+    END METHOD
+
+    METHOD displayRoute()
+        temp = head
+        PRINT "Bus Route: "
+        WHILE temp != NULL
+            PRINT temp.stopName + " → "
+            temp = temp.next
+        END WHILE
+    END METHOD
+END CLASS
+
+
+FUNCTION MAIN
+    CREATE route AS BusRoute
+    route.head = Node("Depot")
+    route.head.next = Node("Main Street")
+    route.head.next.next = Node("City Mall")
+    route.head.next.next.next = Node("Hospital")
+    route.head.next.next.next.next = Node("Airport")
+
+    CALL route.displayRoute()
+
+    CALL route.insertStop("City Mall", "University")
+    CALL route.displayRoute()
+
+    CALL route.deleteStop("Hospital")
+    CALL route.displayRoute()
+
+    CALL route.searchStop("Airport")
+END FUNCTION

@@ -1,0 +1,82 @@
+PSEUDOCODE: Digital Wallet Transactions Report
+
+CLASS Transaction:
+    ATTRIBUTES:
+        - transactionId (String)
+        - merchantName (String)
+        - amount (Double)
+        - date (Date)
+    
+    CONSTRUCTOR Transaction(transactionId, merchantName, amount, date):
+        SET this.transactionId = transactionId
+        SET this.merchantName = merchantName
+        SET this.amount = amount
+        SET this.date = date
+    
+    METHOD getMonth():
+        RETURN date.getMonth()
+    
+    METHOD getMerchantMonth():
+        RETURN merchantName + "|" + getMonth()
+
+CLASS WalletReportGenerator:
+    ATTRIBUTES:
+        - transactions (List<Transaction>)
+    
+    CONSTRUCTOR WalletReportGenerator():
+        INITIALIZE transactions as empty list
+    
+    METHOD addTransaction(transaction):
+        ADD transaction to transactions
+    
+    METHOD groupByMerchantAndMonth():
+        // Using streams to group transactions
+        SET grouped = transactions.stream()
+                                 .collect(groupingBy(
+                                     t -> t.getMerchantMonth(),
+                                     summingDouble(t -> t.amount)
+                                 ))
+        RETURN grouped
+    
+    METHOD generateMerchantReport():
+        SET merchantTotals = transactions.stream()
+                                       .collect(groupingBy(
+                                           t -> t.merchantName,
+                                           summingDouble(t -> t.amount)
+                                       ))
+        
+        PRINT "Merchant Report:"
+        FOR each merchant, total in merchantTotals:
+            PRINT merchant + ": $" + total
+    
+    METHOD generateMonthlyReport():
+        SET monthlyTotals = transactions.stream()
+                                      .collect(groupingBy(
+                                          t -> t.getMonth(),
+                                          summingDouble(t -> t.amount)
+                                      ))
+        
+        PRINT "Monthly Report:"
+        FOR each month, total in monthlyTotals:
+            PRINT "Month " + month + ": $" + total
+    
+    METHOD generateSummaryReport():
+        SET merchantMonthData = groupByMerchantAndMonth()
+        
+        PRINT "Merchant-Month Summary:"
+        FOR each key, amount in merchantMonthData:
+            SET parts = key.split("\\|")
+            PRINT parts[0] + " (Month " + parts[1] + "): $" + amount
+
+MAIN METHOD:
+    CREATE generator = new WalletReportGenerator()
+    
+    CALL generator.addTransaction(Transaction("T001", "Amazon", 100.0, "2024-01-15"))
+    CALL generator.addTransaction(Transaction("T002", "Starbucks", 25.0, "2024-01-20"))
+    CALL generator.addTransaction(Transaction("T003", "Amazon", 150.0, "2024-02-10"))
+    CALL generator.addTransaction(Transaction("T004", "Starbucks", 30.0, "2024-02-15"))
+    CALL generator.addTransaction(Transaction("T005", "Netflix", 15.0, "2024-01-25"))
+    
+    CALL generator.generateMerchantReport()
+    CALL generator.generateMonthlyReport()
+    CALL generator.generateSummaryReport()

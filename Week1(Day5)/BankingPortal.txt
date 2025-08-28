@@ -1,0 +1,86 @@
+PSEUDOCODE: Banking Portal
+
+ABSTRACT CLASS Account:
+    ATTRIBUTES:
+        - accountNumber (String)
+        - holderName (String)
+        - balance (Double)
+    
+    CONSTRUCTOR Account(accountNumber, holderName, balance):
+        SET this.accountNumber = accountNumber
+        SET this.holderName = holderName
+        SET this.balance = balance
+    
+    METHOD deposit(amount):
+        SET balance += amount
+        PRINT "Deposited $" + amount
+    
+    ABSTRACT METHOD withdraw(amount): Boolean
+    ABSTRACT METHOD getMinBalance(): Double
+    
+    METHOD getBalance():
+        RETURN balance
+
+CLASS SavingAccount EXTENDS Account:
+    CONSTRUCTOR SavingAccount(accountNumber, holderName, balance):
+        CALL super(accountNumber, holderName, balance)
+    
+    METHOD withdraw(amount):
+        IF (balance - amount) < 500: // Min balance $500
+            PRINT "Insufficient balance. Min $500 required"
+            RETURN false
+        SET balance -= amount
+        PRINT "Withdrawn $" + amount
+        RETURN true
+    
+    METHOD getMinBalance():
+        RETURN 500.0
+
+CLASS CurrentAccount EXTENDS Account:
+    ATTRIBUTES:
+        - overdraftLimit (Double)
+    
+    CONSTRUCTOR CurrentAccount(accountNumber, holderName, balance):
+        CALL super(accountNumber, holderName, balance)
+        SET overdraftLimit = 1000.0
+    
+    METHOD withdraw(amount):
+        IF amount > (balance + overdraftLimit):
+            PRINT "Exceeds overdraft limit"
+            RETURN false
+        SET balance -= amount
+        PRINT "Withdrawn $" + amount
+        RETURN true
+    
+    METHOD getMinBalance():
+        RETURN -overdraftLimit
+
+CLASS BankingPortal:
+    ATTRIBUTES:
+        - accounts (Map<String, Account>)
+    
+    CONSTRUCTOR BankingPortal():
+        INITIALIZE accounts as empty HashMap
+    
+    METHOD createAccount(type, accountNumber, holderName, balance):
+        IF type equals "SAVING":
+            SET account = new SavingAccount(accountNumber, holderName, balance)
+        ELSE:
+            SET account = new CurrentAccount(accountNumber, holderName, balance)
+        PUT accountNumber, account in accounts
+    
+    METHOD performTransaction(accountNumber, operation, amount):
+        SET account = GET accountNumber from accounts
+        IF operation equals "WITHDRAW":
+            RETURN account.withdraw(amount)
+        ELSE:
+            CALL account.deposit(amount)
+            RETURN true
+
+MAIN METHOD:
+    CREATE portal = new BankingPortal()
+    CALL portal.createAccount("SAVING", "SAV001", "John", 1000.0)
+    CALL portal.createAccount("CURRENT", "CUR001", "Jane", 500.0)
+    
+    CALL portal.performTransaction("SAV001", "WITHDRAW", 600.0) // Should fail
+    CALL portal.performTransaction("CUR001", "WITHDRAW", 1200.0) // Should work

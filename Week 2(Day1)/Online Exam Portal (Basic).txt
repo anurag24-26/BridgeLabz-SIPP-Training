@@ -1,0 +1,58 @@
+CLASS User
+    ATTRIBUTE username
+    ATTRIBUTE password
+
+    METHOD login()
+        PRINT "Generic user login process"
+
+END CLASS
+
+
+CLASS Student EXTENDS User
+    ATTRIBUTE enrolledCourse
+
+    METHOD login()
+        IF validateCredentials(username, password) = TRUE THEN
+            IF enrolledCourse IS NOT NULL THEN
+                PRINT "Student login successful. Show available exams."
+            ELSE
+                PRINT "Student not enrolled in any course. Access denied."
+            END IF
+        ELSE
+            PRINT "Invalid student credentials."
+        END IF
+    END METHOD
+END CLASS
+
+
+CLASS Admin EXTENDS User
+    ATTRIBUTE staffID
+    ATTRIBUTE hasPrivileges
+
+    METHOD login()
+        IF validateCredentials(username, password) = TRUE THEN
+            IF hasPrivileges = TRUE THEN
+                PRINT "Admin login successful. Show exam management tools."
+            ELSE
+                PRINT "Admin privileges missing. Access denied."
+            END IF
+        ELSE
+            PRINT "Invalid admin credentials."
+        END IF
+    END METHOD
+END CLASS
+
+
+FUNCTION MAIN
+    CREATE studentUser AS Student
+    studentUser.username = "john123"
+    studentUser.password = "pass123"
+    studentUser.enrolledCourse = "Computer Science"
+    CALL studentUser.login()
+
+    CREATE adminUser AS Admin
+    adminUser.username = "admin1"
+    adminUser.password = "adminPass"
+    adminUser.hasPrivileges = TRUE
+    CALL adminUser.login()
+END FUNCTION

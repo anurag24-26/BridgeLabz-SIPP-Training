@@ -1,0 +1,52 @@
+CLASS Course
+    PRIVATE title
+    PRIVATE duration
+    PRIVATE price
+
+    METHOD Constructor(title, duration, price)
+        SET this.title = title
+        SET this.duration = duration
+        SET this.price = price
+
+    METHOD getDetails()
+        RETURN title + " - " + duration + " - ₹" + price
+END CLASS
+
+
+CLASS Student
+    PRIVATE name
+    PRIVATE email
+    PRIVATE enrolledCourses ← empty LIST
+
+    METHOD Constructor(name, email)
+        SET this.name = name
+        SET this.email = email
+
+    METHOD enrollCourse(course)
+        IF course NOT IN enrolledCourses
+            ADD course TO enrolledCourses
+            PRINT name + " successfully enrolled in " + course.title
+        ELSE
+            PRINT "Already enrolled in " + course.title
+
+    METHOD viewEnrolledCourses()
+        PRINT name + "'s Enrolled Courses:"
+        FOR each course IN enrolledCourses
+            PRINT course.getDetails()
+END CLASS
+
+
+SIMULATION:
+CREATE course1 = new Course("Java Programming Basics", "6 weeks", 4999)
+CREATE course2 = new Course("Data Structures in Java", "8 weeks", 5999)
+CREATE course3 = new Course("Spring Boot for Web Development", "10 weeks", 6999)
+
+CREATE student1 = new Student("Amit", "amit@email.com")
+student1.enrollCourse(course1)
+student1.enrollCourse(course2)
+student1.viewEnrolledCourses()
+
+CREATE student2 = new Student("Priya", "priya@email.com")
+student2.enrollCourse(course3)
+student2.enrollCourse(course1)
+student2.viewEnrolledCourses()

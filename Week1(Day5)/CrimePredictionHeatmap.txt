@@ -1,0 +1,79 @@
+PSEUDOCODE: Crime Prediction Heatmap
+
+CLASS CityZone:
+    ATTRIBUTES:
+        - zoneId (String)
+        - crimeCount (Integer)
+        - riskLevel (String)
+        - neighbors (List<String>)
+    
+    CONSTRUCTOR CityZone(zoneId, crimeCount):
+        SET this.zoneId = zoneId
+        SET this.crimeCount = crimeCount
+        SET riskLevel = calculateRisk(crimeCount)
+        INITIALIZE neighbors as empty list
+    
+    METHOD calculateRisk(crimes):
+        IF crimes > 50:
+            RETURN "HIGH"
+        ELSE IF crimes > 20:
+            RETURN "MEDIUM"
+        RETURN "LOW"
+    
+    METHOD addNeighbor(zoneId):
+        ADD zoneId to neighbors
+
+CLASS CityGraph:
+    ATTRIBUTES:
+        - zones (Map<String, CityZone>)
+        - visited (Set<String>)
+    
+    CONSTRUCTOR CityGraph():
+        INITIALIZE zones as empty HashMap
+        INITIALIZE visited as empty HashSet
+    
+    METHOD addZone(zone):
+        PUT zone.zoneId, zone in zones
+    
+    METHOD addConnection(zone1, zone2):
+        GET zones[zone1].addNeighbor(zone2)
+        GET zones[zone2].addNeighbor(zone1)
+    
+    METHOD findHighRiskAreas():
+        CLEAR visited
+        CREATE highRiskClusters as empty list
+        
+        FOR each zoneId, zone in zones:
+            IF NOT visited.contains(zoneId) AND zone.riskLevel equals "HIGH":
+                CREATE cluster as empty list
+                CALL dfsHighRisk(zoneId, cluster)
+                ADD cluster to highRiskClusters
+        
+        RETURN highRiskClusters
+    
+    METHOD dfsHighRisk(zoneId, cluster):
+        IF visited.contains(zoneId):
+            RETURN
+        
+        ADD zoneId to visited
+        SET zone = GET zoneId from zones
+        
+        IF zone.riskLevel equals "HIGH":
+            ADD zone to cluster
+            FOR each neighbor in zone.neighbors:
+                CALL dfsHighRisk(neighbor, cluster)
+
+MAIN METHOD:
+    CREATE graph = new CityGraph()
+    
+    CALL graph.addZone(CityZone("Z1", 60)) // HIGH
+    CALL graph.addZone(CityZone("Z2", 30)) // MEDIUM  
+    CALL graph.addZone(CityZone("Z3", 70)) // HIGH
+    CALL graph.addZone(CityZone("Z4", 10)) // LOW
+    
+    CALL graph.addConnection("Z1", "Z2")
+    CALL graph.addConnection("Z2", "Z3")
+    CALL graph.addConnection("Z3", "Z4")
+    
+    SET clusters = graph.findHighRiskAreas()
+    PRINT "Found " + clusters.size() + " high-risk clusters"

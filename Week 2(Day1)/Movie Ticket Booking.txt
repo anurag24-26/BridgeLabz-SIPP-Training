@@ -1,0 +1,86 @@
+CLASS Ticket
+    PRIVATE ATTRIBUTE movieName
+    PRIVATE ATTRIBUTE seatNumber
+    PRIVATE ATTRIBUTE price
+    PRIVATE ATTRIBUTE bookingStatus   // Booked or Cancelled
+
+    METHOD constructor(movieName, seatNumber, price)
+        SET this.movieName = movieName
+        SET this.seatNumber = seatNumber
+        SET this.price = price
+        SET this.bookingStatus = "Booked"
+    END METHOD
+
+    METHOD cancelTicket()
+        SET bookingStatus = "Cancelled"
+        PRINT "Ticket for " + movieName + " seat " + seatNumber + " has been cancelled."
+    END METHOD
+
+    METHOD getDetails()
+        RETURN movieName, seatNumber, price, bookingStatus
+    END METHOD
+END CLASS
+
+
+CLASS Theatre
+    ATTRIBUTE name
+    ATTRIBUTE availableSeats  // list of seat numbers
+    ATTRIBUTE tickets         // collection of Ticket objects
+
+    METHOD constructor(name, seats)
+        SET this.name = name
+        SET this.availableSeats = seats
+        SET this.tickets = EMPTY LIST
+    END METHOD
+
+    METHOD issueTicket(movieName, seatNumber, price)
+        IF seatNumber IN availableSeats THEN
+            CREATE newTicket AS Ticket(movieName, seatNumber, price)
+            ADD newTicket TO tickets
+            REMOVE seatNumber FROM availableSeats
+            PRINT "Ticket issued for " + movieName + " Seat: " + seatNumber
+            RETURN newTicket
+        ELSE
+            PRINT "Seat not available!"
+            RETURN NULL
+        END IF
+    END METHOD
+
+    METHOD cancelTicket(ticket)
+        CALL ticket.cancelTicket()
+        ADD ticket.seatNumber BACK TO availableSeats
+        PRINT "Seat " + ticket.seatNumber + " is now available again."
+    END METHOD
+END CLASS
+
+
+CLASS Customer
+    ATTRIBUTE name
+
+    METHOD constructor(name)
+        SET this.name = name
+    END METHOD
+
+    METHOD bookTicket(theatre, movieName, seatNumber, price)
+        PRINT name + " is booking a ticket..."
+        ticket = theatre.issueTicket(movieName, seatNumber, price)
+        RETURN ticket
+    END METHOD
+
+    METHOD cancelTicket(theatre, ticket)
+        PRINT name + " is cancelling the ticket..."
+        theatre.cancelTicket(ticket)
+    END METHOD
+END CLASS
+
+
+FUNCTION MAIN
+    CREATE theatre AS Theatre("PVR Cinema", ["A10", "A11", "A12"])
+    CREATE customer AS Customer("Ravi")
+
+   
+    ticket1 = customer.bookTicket(theatre, "Avengers: Endgame 6PM", "A12", 300)
+
+
+    customer.cancelTicket(theatre, ticket1)
+END FUNCTION

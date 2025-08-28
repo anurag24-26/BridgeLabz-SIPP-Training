@@ -1,0 +1,45 @@
+CLASS Student
+    name
+    marks
+END CLASS
+
+
+FUNCTION compare(studentA, studentB)
+    IF studentA.marks != studentB.marks
+        RETURN studentB.marks - studentA.marks
+    ELSE
+        RETURN alphabeticalOrder(studentA.name, studentB.name)
+END FUNCTION
+
+
+FUNCTION mergeSort(studentList)
+    IF size of studentList <= 1
+        RETURN studentList
+
+    mid = size DIV 2
+    left = mergeSort(first half of studentList)
+    right = mergeSort(second half of studentList)
+
+    RETURN merge(left, right)
+END FUNCTION
+
+
+FUNCTION merge(left, right)
+    result = empty list
+    WHILE left NOT EMPTY AND right NOT EMPTY
+        IF compare(left[0], right[0]) <= 0
+            ADD left[0] TO result
+            REMOVE first element from left
+        ELSE
+            ADD right[0] TO result
+            REMOVE first element from right
+    ADD remaining elements from left and right
+    RETURN result
+END FUNCTION
+
+
+SIMULATION:
+students = [("Amit", 92), ("Bhavna", 92), ("Kiran", 85), ("Dinesh", 78), ("Charu", 92)]
+sortedList = mergeSort(students)
+
+PRINT sortedList
