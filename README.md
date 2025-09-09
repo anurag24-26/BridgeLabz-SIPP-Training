@@ -51,15 +51,24 @@ This repository demonstrates progressive learning in **Core Java**, **OOPs**, **
 | [`LinkedList`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/DSA/LinkedList)                 | Custom implementation of singly linked lists |
 | [`SortingAlgorithms`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/DSA/SortingAlgorithms)   | Java implementations of Bubble, Selection, Insertion, Merge, and Quick sort |
 | [`Stack_and_Queue_HashMap`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/DSA/Stack_and_Queue_HashMap) | Stack, Queue using arrays/LinkedList and usage of Java’s HashMap |
-
+| [`Algorithm'sRuntimeAnalysis&Big-O_Notation`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/DSA/Algorithm'sRuntimeAnalysis&Big-O_Notation) |  Contains examples and explanations of algorithm runtime analysis with Big-O notation, showcasing time/space complexity comparisons for different approaches.|
 ---
 
 ## 📂 Generics Branch
 
 | Folder Name                                                                                         | Description |
 |------------------------------------------------------------------------------------------------------|-------------|
-| [`SmartWarehouse`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Generics/SmartWarehouse) | Java Generics project managing typed inventory in a smart warehouse system |
-| [`GenericExamples`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Generics/GenericExamples) | Sample programs using bounded/unbounded generics and wildcards |
+| [`Collections`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Collections)               | Java Collection Framework examples including List, Set, Map implementations |
+| [`Exceptions`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Exceptions)                 | Programs demonstrating Java Exception Handling with try-catch, throw/throws, and custom exceptions |
+| [`Collectors`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Collectors)                 | Usage of Java Collectors API for grouping, partitioning, and summarizing data streams |
+| [`Functional_Interfaces`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Functional_Interfaces) | Examples of functional interfaces like Predicate, Function, Consumer, and custom functional interfaces |
+| [`Generics`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Generics)                     | Concepts of Java Generics with bounded/unbounded types, wildcards, and type-safe programming |
+| [`Java_IO_Streams`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Java_IO_Streams)       | File handling and stream-based input/output operations in Java |
+| [`Lambda_Expressions`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Lambda_Expressions) | Examples using Java Lambda expressions for cleaner and functional-style code |
+| [`Reflections&Annotations`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Reflections&Annotations) | Programs demonstrating Reflection API and creating/using custom annotations |
+| [`Regex_and_Junit`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/Regex_and_Junit)       | Java Regular Expressions examples and JUnit test cases for unit testing |
+| [`StreamAPI`](https://github.com/anurag24-26/BridgeLabz-SIPP-Training/tree/StreamAPI)                   | Examples of Java Stream API for filtering, mapping, reducing, and parallel streams |
+
 
 ---
 
